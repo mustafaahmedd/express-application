@@ -17,7 +17,7 @@ class buyCoinController {
         }
 
         next()
-    }
+    }    
 
 }
 
