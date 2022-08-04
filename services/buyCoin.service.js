@@ -8,12 +8,6 @@ class buyCoinService {
                 resolve(res[0]);
             })
         });
-        const userResult = await new Promise(function(resolve, reject) {
-            connection.query('SELECT * FROM users WHERE id=?', user_id, function(err, res, field) {
-                if (err) throw err
-                resolve(res[0]);
-            })
-        });
 
         if(!userResult){
             console.log("user not found")
