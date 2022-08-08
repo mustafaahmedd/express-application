@@ -2,11 +2,6 @@ const userService = require('../services/user.service')
 
 class userController {
 
-    static async sqlAllUsers(req, res, next){
-        const response = await userService.users();
-        res.json(response);
-    }
-
     static async apiGetAllUsers(req, res, next) {
         try {
             const page = parseInt(req.query.page);
