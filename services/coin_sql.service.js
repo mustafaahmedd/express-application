@@ -49,7 +49,7 @@ class coinSqlService {
                     if (err) throw err;
                 })
                 response.status = 200,
-                response.coin = coin;
+                    response.coin = coin;
                 response.message = "Coin deleted Successfully."
             }
         } catch (error) {
@@ -62,14 +62,17 @@ class coinSqlService {
         let response = {}
 
         try {
-            const newPrice = body.price;
-            const newQuantity = body.quantity;
+            const found = await this.getCoinById(id);
+            const newPrice = body.price ? body.price : found.price;
+            const newQuantity = body.quantity ? body.quantity : found.quantity;
 
-            let updQuery = "UPDATE coins SET price = " + body.price + ", quantity = " + body.quantity + " WHERE id = " + id;
-            connection.query(updQuery,(err,rows, fields)=>{
-                if(err) throw err;
+            let updQuery = "UPDATE coins SET price = " + newPrice + ", quantity = " + newQuantity + " WHERE id = " + id;
+            connection.query(updQuery, (err, rows, fields) => {
+                if (err) throw err;
+                // we can't set response here if we want to return it
+                //it takes some time and return before the result.
+                
             });
-            
             response.status = 200;
             response.data = { price: newPrice, stock: newQuantity }
             response.message = `coin updated successfully with new price: ${newPrice}.`
