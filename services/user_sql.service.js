@@ -33,7 +33,7 @@ class userSqlService {
             console.log(error.message)
         }
     }
-
+    
     static async createUser(body) {
         let response = {};
 
@@ -50,7 +50,12 @@ class userSqlService {
                     email: email, phone: phone, balance: balance,
                     age: age, location: location
                 }
-
+                
+                //db.query('INSERT INTO users (fname,lname,email,phone,balance,age,location) VALUES (?,?,?,?,?,?,?)',
+                // [fname,lname,email,phone,balance,age,location], (err, res)=> {
+                    // if(err) throw err;
+                    // else res.send("adasd");
+                // });
                 db.query(query, data, (err, rows, fields) => {
                     if (err) throw err;
                 })
@@ -110,6 +115,7 @@ class userSqlService {
         }
         return response;
     }
+    
     static async deleteUser(id) {
         let response = {};
         try {

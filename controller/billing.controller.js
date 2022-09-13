@@ -14,7 +14,7 @@ class billingController {
 
         const units = req.body.units;
         const response = billingService.threeFaceBill(units);
-        return res.json({ status: 200, Total_bill: response +" PKR", message: "Three face Bill calculated successfully." })
+        return res.json({ status: 200, Total_bill: response +" PKR", message: "Three face Billcd  calculated successfully." })
 
     }
 }

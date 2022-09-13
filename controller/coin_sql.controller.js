@@ -1,6 +1,6 @@
 const coinSqlService = require('../services/coin_sql.service')
 
-class coinSqlController {
+class coinController {
 
     static async apiCreateCoin(req, res, next) {
         try {
@@ -15,16 +15,23 @@ class coinSqlController {
     }
 
     static async apiGetAllCoins(req, res, next) {
-
         try {
-            const response = await coinSqlService.getCoins();
-            return res.json({ status: 200, data: response, message: 'fetched all coins.' });
+            const page = req.query.page ? Number(req.query.page) : 1;
+            const limit = req.query.limit ? Number(req.query.limit) : 4;
+            let response ={};
+
+            if(page && limit){
+                response = await coinSqlService.paginatedResults(page, limit);
+            }
+            else{
+                response = await coinSqlService.getCoins();
+            }
+
+            return res.send({ status: 200, data: response, message: response.message });
 
         } catch (error) {
-            console.log(error.message);
+            console.log("Error: ",error.message);
         }
-
-        next();
 
     }
 
@@ -61,15 +68,31 @@ class coinSqlController {
             const id = req.params.id;
 
             const response = await coinSqlService.getCoinById(id)
-            if(response)
-               return res.json({status:200,data:response,message:'coin found.'})
-            else    
-               return res.json({status:400,data:{},message:'coin not found.'})
-            
+            if (response)
+                return res.json({ status: 200, data: response, message: 'coin found.' })
+            else
+                return res.json({ status: 400, data: {}, message: 'coin not found.' })
+
         } catch (error) {
             console.log(error.message);
         }
+        next();
+    }
+
+    static async paginatedResults(req, res, next) {
+        try {
+            const page = req.query.page ? Number(req.query.page) : 1;
+            const limit = req.query.limit ? Number(req.query.limit) : 4;
+
+            const response = await coinSqlService.paginatedResults(page, limit);
+            // console.log("response:", response);
+            return res.send({ status: 200, data: response, message: response.message });
+
+        } catch (error) {
+            console.log(error.message);
+        }
+
     }
 }
 
-module.exports = coinSqlController;
+module.exports = coinController;
