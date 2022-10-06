@@ -7,7 +7,8 @@ export default function Navbar() {
         Coins
       </Link>
       <ul>
-        <CustomLink to="/">Home</CustomLink>
+        <CustomLink to="/">Home</CustomLink>  
+        <CustomLink to="/users">Users</CustomLink>
         <CustomLink to="/coins">Coins</CustomLink>
         <CustomLink to="/billing">Billing</CustomLink> 
         <CustomLink to="/purchase">Purchase</CustomLink>

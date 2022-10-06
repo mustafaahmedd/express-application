@@ -26,4 +26,4 @@ class CrudServices{
 //   update,
 //   removeAll
 // };
-export default new CrudServices;
+export default CrudServices;
