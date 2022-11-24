@@ -62,7 +62,7 @@ class coinController {
 
         next();
     }
-
+ 
     static async apiGetCoinById(req, res, next) {
         try {
             const id = req.params.id;
