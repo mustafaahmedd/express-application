@@ -1,0 +1,1 @@
+export const usersAPI = 'http://localhost:5000/users'
