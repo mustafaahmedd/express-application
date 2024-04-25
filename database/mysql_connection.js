@@ -4,13 +4,12 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "express-db"
+    database: "react"
 })
 
 con.connect((err) => {
     if (err) throw err
-    console.log("my SQL connected.")
+    console.log("my SQL Server Connected.")
 })
-
 
 module.exports = con;
